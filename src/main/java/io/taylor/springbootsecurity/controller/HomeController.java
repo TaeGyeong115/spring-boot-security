@@ -1,4 +1,4 @@
-package io.taylor.springbootsecurity;
+package io.taylor.springbootsecurity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

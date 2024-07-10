@@ -13,8 +13,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class RestRunner implements ApplicationRunner {
 
-//    @Autowired
-//    RestTemplateBuilder restTemplateBuilder;
+    @Autowired
+    RestTemplateBuilder restTemplateBuilder;
 
     @Autowired
     WebClient.Builder builder;
@@ -22,14 +22,14 @@ public class RestRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 //        RestTemplate restTemplate = restTemplateBuilder.build();
-        WebClient webClient = builder.build();
+        WebClient webClient = builder.baseUrl("http://localhost:8080").build();
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
 //        String helloResult = restTemplate.getForObject("http://localhost:8080/hello", String.class);
 //        System.out.println(helloResult);
-        Mono<String> helloMono = webClient.get().uri("http://localhost:8080/hello").retrieve().bodyToMono(String.class);
+        Mono<String> helloMono = webClient.get().uri("/hello").retrieve().bodyToMono(String.class);
         helloMono.subscribe(s -> {
             System.out.println(s);
 
@@ -43,7 +43,7 @@ public class RestRunner implements ApplicationRunner {
 //        String worldResult = restTemplate.getForObject("http://localhost:8080/world", String.class);
 //        System.out.println(worldResult);
 
-        Mono<String> worldMono = webClient.get().uri("http://localhost:8080/world").retrieve().bodyToMono(String.class);
+        Mono<String> worldMono = webClient.get().uri("/world").retrieve().bodyToMono(String.class);
         worldMono.subscribe(s -> {
             System.out.println(s);
 

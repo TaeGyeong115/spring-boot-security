@@ -1,0 +1,16 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude: env, beans
+# spring security 를 이용해 어드민만 접근이 가능하도록 막아두어야 함
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhot:8080
+
+server:
+  port: 18080
